@@ -26,7 +26,7 @@ Only [.NET Core runtime](https://dotnet.microsoft.com/download/linux-package-man
 
 ### Installation
 ```
-$ wget https://github.com/lfkdev/MultiLogMonitor/releases/tag/2.8 /usr/local/bin/mlogm.zip
+$ wget https://github.com/lfkdev/MultiLogMonitor/releases/download/2.8/mlogmv28linux.zip /usr/local/bin/mlogm.zip
 $ unzip /usr/local/bin/mlogm.zip
 $ sudo chmod +x /usr/local/bin/mlogm
 ```
