@@ -1,5 +1,4 @@
 [THIS PROJEKT IS STILL IN ALPHA]
-
 # MultiLogMonitor
 A lightweight program (12KB) written in C# for linux to view multiple logs simultaneously in one terminal.
 
@@ -27,7 +26,7 @@ Only [.NET Core runtime](https://dotnet.microsoft.com/download/linux-package-man
 
 ### Installation
 ```
-$ wget github.com/lfkdev/MultiLogMonitor/releases/latest/download/mlogm.zip /usr/local/bin/mlogm.zip
+$ wget https://github.com/lfkdev/MultiLogMonitor/releases/tag/2.8 /usr/local/bin/mlogm.zip
 $ unzip /usr/local/bin/mlogm.zip
 $ sudo chmod +x /usr/local/bin/mlogm
 ```
