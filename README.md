@@ -39,5 +39,5 @@ $ mlogm --about
 
 - Performance optimizing
 - rescale window without breaking mlogm
-- config to parse different settings to mlogm (ex. a "grep" funktion"
+- config to parse different settings to mlogm (ex. a "grep" funktion")
 - more / better syntax highlight
