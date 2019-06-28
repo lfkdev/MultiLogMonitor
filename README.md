@@ -1,3 +1,5 @@
+[THIS PROJEKT IS STILL IN ALPHA]
+
 # MultiLogMonitor
 A lightweight program (12KB) written in C# for linux to view multiple logs simultaneously in one terminal.
 
@@ -13,15 +15,15 @@ Add as many logs as you want. The more logs are added the more space is needed i
 Beside this there are two more arguments possible:
 ```
 $ MlogM  --about
-$ MlogM  -h
+$ MlogM  -h / -H
 ```
 
 ### Info
-MultiLogMonitor is written in C# on .net Core and tested on Linux only. Theoretically it would work on Windows and Mac too, but I did not test this.
+MultiLogMonitor is written in C# on .net Core and tested on Linux only. Theoretically it should work on Windows and Mac too, but I did not test this.
 
 ### Requirements
 Only [.NET Core runtime](https://dotnet.microsoft.com/download/linux-package-manager/ubuntu16-04/runtime-2.2.0) Version 2.0 or newer.
-(Choose your distro and only install .NET Core runtime. ~ 30MB Space required)
+(Optionally wait for a self contained release where you dont need to install .NET Core)
 
 ### Installation
 ```
@@ -34,3 +36,9 @@ testing:
 $ mlogm --about
 ```
 
+### RoadMap
+
+- Performance optimizing
+- rescale window without breaking mlogm
+- config to parse different settings to mlogm (ex. a "grep" funktion"
+- more / better syntax highlight
