@@ -1,4 +1,3 @@
-[THIS PROJEKT IS STILL IN ALPHA]
 # MultiLogMonitor
 A lightweight program (12KB) written in C# for linux to view multiple logs simultaneously in one terminal.
 
@@ -8,13 +7,13 @@ A lightweight program (12KB) written in C# for linux to view multiple logs simul
 
 ### Usage:
 ```
-$ mlogm /var/log/auth.log /var/log/syslog /var/log/kern.log
+$ dotnet mlogm /var/log/auth.log /var/log/syslog /var/log/kern.log
 ```
 Add as many logs as you want. The more logs are added the more space is needed in the terminal.
 Beside this there are two more arguments possible:
 ```
-$ MlogM  --about
-$ MlogM  -h / -H
+$ dotnet mlogm  --about
+$ dotnet mlogm  -h / -H
 ```
 
 ### Info
@@ -36,7 +35,6 @@ $ mlogm --about
 ```
 
 ### RoadMap
-
 - Performance optimizing
 - rescale window without breaking mlogm
 - config to parse different settings to mlogm (ex. a "grep" funktion")
