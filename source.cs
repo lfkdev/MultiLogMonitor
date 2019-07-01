@@ -15,10 +15,10 @@ namespace LogMonitor
         static int ConsolWidth = Console.WindowWidth;
         static int ConsolHeight = Console.WindowHeight;
         static int LineCount = 6;
-        static int UpdateTime = 500; // millisecond
+        static int UpdateTime = 200; // millisecond
         static string startCommand;
         static string OS;
-        static readonly string ver = "2.4";
+        static readonly string ver = "2.5";
         static List<OutPutField> felder;
 
         
@@ -26,6 +26,7 @@ namespace LogMonitor
         {
             public string LogFile { get; set; }
             public string LogName { get; set; }
+            public long LogSize { get; set; }
             public int Number { get; set; }
             public int CursorPosition { get; set; }
         }
@@ -76,8 +77,8 @@ namespace LogMonitor
                 }
 
                 string LogFile = Path.GetFileName(arg);
-
-                felder.Add(new OutPutField { LogFile = LogFile, LogName = arg, CursorPosition = curpos, Number = i });
+                long size = new FileInfo(arg).Length;
+                felder.Add(new OutPutField { LogFile = LogFile, LogName = arg, CursorPosition = curpos, Number = i, LogSize = size });
                 curpos += LineCount+2;
                 i++;
             }
@@ -96,10 +97,16 @@ namespace LogMonitor
             ShowTitle();
             CreateField(felder.Count);
 
+            foreach (var feld in felder)
+            {
+                RefreshField(feld.LogName, feld.CursorPosition);
+            }
+
             while (Running)
             {
-                RefreshFields();
+                RefreshFieldsIfNeeded();
                 ShowTitle();
+                
                 Thread.Sleep(UpdateTime);
             }
         }
@@ -117,100 +124,123 @@ namespace LogMonitor
             Console.WriteLine(" mlogm --about\n");
         }
 
-        private static void RefreshFields()
+        private static void RefreshFieldsIfNeeded()
         {
-            completedRound = false;
             foreach (var feld in felder)
             {
-                try
-                    {
-                    FileStream fs = new FileStream(feld.LogName, FileMode.Open, FileAccess.Read);
-                    fs.Seek(Math.Max(-1024, -fs.Length), SeekOrigin.End);
-                    byte[] bytes = new byte[1024];
-                    fs.Read(bytes, 0, 1024);
-                    string s = Encoding.Default.GetString(bytes);
-                    //string result = s.Substring(Math.Max(0, s.Length - 400));
-
-                    List<string> result = TakeLastLines(s, LineCount+1);
-                    result.RemoveAt(result.Count - 1); // remove newline
-                    List<string> result_cuttet = new List<string>();
-                    
-                    foreach (string line in result)
-                    {
-                        if (line != String.Empty)
-                        {
-                            if (line.Length > ConsolWidth - 6)
-                            {
-                                string newline = line.Substring(0, ConsolWidth - 6);
-                                result_cuttet.Add(" ║ " + newline + Spaces((ConsolWidth - 6) - newline.Length) + " ║");
-                            }
-                            else
-                            {
-                                result_cuttet.Add(" ║ " + line + Spaces((ConsolWidth - 6) - line.Length) + " ║");
-                            }
-                        }
-                    }
-
-                    while (result_cuttet.Count != LineCount)
-                    {
-                        result_cuttet.Add(" ║ "+Spaces((ConsolWidth - 6)) + " ║");
-                    }
-
-                    //REDRAW LAYOUT
-                    if (ConsolWidth != Console.WindowWidth)
-                    {
-                        Console.SetCursorPosition(0, feld.CursorPosition - 1);
-                        DrawLine();
-                        Console.SetCursorPosition(0, feld.CursorPosition - 1);
-                        Console.WriteLine(" ╔═ Log: {0} ", feld.LogFile);
-                        Console.SetCursorPosition(0, feld.CursorPosition);
-                    }
-                    
-                    Console.SetCursorPosition(0, feld.CursorPosition);
-
-                    for (int i = 0; i < result_cuttet.Count; i++)
-                    {
-                        Char[] array = result_cuttet[i].ToCharArray();
-
-                        foreach (Char c in array)
-                        {
-                            if (c == '[' || c == ']')
-                            {
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                Console.Write(c);
-                            }
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.White;
-                                Console.Write(c);
-                            }
-                        }
-                        Console.WriteLine();
-                    }
-
-                    if (ConsolWidth != Console.WindowWidth)
-                    {
-                        DrawLine("down");
-                        
-                    }
-
-                    Console.SetCursorPosition(0, Console.CursorTop);
-                    //ConsolWidth = Console.WindowWidth;
+                long NewSize = new FileInfo(feld.LogName).Length;
+                if (NewSize != feld.LogSize)
+                {
+                    //RedrawLayoutIfNeeded();
+                    RefreshField(feld.LogName, feld.CursorPosition);
                 }
-                catch (UnauthorizedAccessException) { Console.WriteLine("No permissions to read file! :( ({0})", feld.LogName); Exit(1); }
-                catch (Exception) { Console.WriteLine("Unknown error occured! (ER: RF)"); Exit(1); }
+                feld.LogSize = NewSize;
             }
+        }
+
+        private static void RedrawLayoutIfNeeded()
+        {
+            if (ConsolWidth != Console.WindowWidth)
+            {
+                foreach (var feld in felder)
+                {
+                    Console.SetCursorPosition(0, feld.CursorPosition - 1);
+                    DrawLine();
+                    Console.SetCursorPosition(0, feld.CursorPosition - 1);
+                    Console.WriteLine(" ╔═ Log: {0} ", feld);
+                    Console.SetCursorPosition(0, feld.CursorPosition + LineCount);
+                    DrawLine("down");
+                }
+                ConsolWidth = Console.WindowWidth;
+            }
+        }
+
+        private static void RefreshField(string logfilePfad, int curpos)
+        {
+            completedRound = false;
+            try
+                {
+                FileStream fs = new FileStream(logfilePfad, FileMode.Open, FileAccess.Read);
+                fs.Seek(Math.Max(-1024, -fs.Length), SeekOrigin.End);
+                byte[] bytes = new byte[1024];
+                fs.Read(bytes, 0, 1024);
+                string s = Encoding.Default.GetString(bytes);
+                //string result = s.Substring(Math.Max(0, s.Length - 400));
+
+                List<string> result = TakeLastLines(s, LineCount+1);
+                result.RemoveAt(result.Count - 1); // remove newline
+                List<string> result_cuttet = new List<string>();
+                    
+                foreach (string line in result)
+                {
+                    if (line != String.Empty)
+                    {
+                        if (line.Length > ConsolWidth - 6)
+                        {
+                            string newline = line.Substring(0, ConsolWidth - 6);
+                            result_cuttet.Add(" ║ " + newline + Spaces((ConsolWidth - 6) - newline.Length) + " ║");
+                        }
+                        else
+                        {
+                            result_cuttet.Add(" ║ " + line + Spaces((ConsolWidth - 6) - line.Length) + " ║");
+                        }
+                    }
+                }
+
+                while (result_cuttet.Count != LineCount)
+                {
+                    result_cuttet.Add(" ║ "+Spaces((ConsolWidth - 6)) + " ║");
+                }
+
+
+                    
+                Console.SetCursorPosition(0, curpos);
+
+                for (int i = 0; i < result_cuttet.Count; i++)
+                {
+                    Char[] array = result_cuttet[i].ToCharArray();
+
+                    foreach (Char c in array)
+                    {
+                        if (c == '[' || c == ']')
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.Write(c);
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.Write(c);
+                        }
+                    }
+                    Console.WriteLine();
+                }
+
+                if (ConsolWidth != Console.WindowWidth)
+                {
+                    DrawLine("down");
+                        
+                }
+
+                Console.SetCursorPosition(0, Console.CursorTop);
+                //ConsolWidth = Console.WindowWidth;
+            }
+            catch (UnauthorizedAccessException) { Console.WriteLine("No permissions to read file! :( ({0})", logfilePfad); Exit(1); }
+            //catch (Exception) { Console.WriteLine("Unknown error occured! (ER: RF)"); Exit(1); }
+
             if (((LineCount + 2) * felder.Count) + 1 >= Console.WindowHeight - 2)
             {
-                Console.WriteLine("Your terminal window is too small for looking at {0} logs at the same time!\n(Needed {1} rows but got {2} rows.)", felder.Count, (LineCount + 2) * felder.Count, Console.WindowHeight - 3);
+                Console.WriteLine("Increase your terminal Y Size for looking at {0} logs at the same time!\n(Needed {1} rows but got {2} rows.)", felder.Count, (LineCount + 2) * felder.Count, Console.WindowHeight - 3);
                 ExitFirst(1);
             }
 
             // reset value
-            ConsolWidth = Console.WindowWidth;
+            
 
             completedRound = true;
         }
+
+
 
         private static List<string> TakeLastLines(string text, int count)
         {
