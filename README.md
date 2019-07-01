@@ -1,6 +1,7 @@
 # MultiLogMonitor
-[![Size](https://img.shields.io/github/size/lfkdev/MultiLogMonitor/release/3.0/mlogm3-0.svg)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+![Size](https://img.shields.io/github/size/lfkdev/MultiLogMonitor/release/3.0/mlogm3-0.svg)
+![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
+![Version](https://img.shields.io/github/release-pre/lfkdev/MultiLogMonitor.svg)
 
 A lightweight program (12KB) written in C# for linux to view multiple logs simultaneously in one terminal.
 
