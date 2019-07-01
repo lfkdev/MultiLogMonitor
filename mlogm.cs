@@ -18,7 +18,7 @@ namespace LogMonitor
         static int UpdateTime = 200; // millisecond
         static string startCommand;
         static string OS;
-        static readonly string ver = "2.5";
+        static readonly string ver = "3.0";
         static List<OutPutField> felder;
 
         
