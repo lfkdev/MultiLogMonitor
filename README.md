@@ -6,6 +6,10 @@
 A lightweight program (12KB) written in C# for linux to view multiple logs simultaneously in one terminal.
 
 <p align="center">
+  <img src="https://raw.githubusercontent.com/lfkdev/MultiLogMonitor/master/mlogm_logo.png">
+</p>
+
+<p align="center">
   <img src="https://raw.githubusercontent.com/lfkdev/MultiLogMonitor/master/mlogmpreview.gif">
 </p>
 
