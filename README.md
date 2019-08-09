@@ -2,8 +2,6 @@
   <img src="https://raw.githubusercontent.com/lfkdev/MultiLogMonitor/master/mlogm_logo.png">
 </p>
 
-<p>A lightweight program (12KB) written in C# for linux to view multiple logs simultaneously in one terminal.</p>
-
 <div id="badges" align="center">
  
   [![Size](https://img.shields.io/github/size/lfkdev/MultiLogMonitor/release/3.0/mlogm3-0.svg)](https://github.com/lfkdev/mlogm/releases)
@@ -12,6 +10,11 @@
 
 </div>
 
+<p>A lightweight program (12KB) written in C# for linux to view multiple logs simultaneously in one terminal.</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/lfkdev/MultiLogMonitor/master/mlogmpreview.gif">
+</p>
 ### Usage:
 ```
 $ dotnet mlogm /var/log/auth.log /var/log/syslog /var/log/kern.log
