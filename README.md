@@ -17,6 +17,7 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/lfkdev/MultiLogMonitor/master/mlogmpreview.gif">
 </p>
+
 ### Usage:
 ```
 $ dotnet mlogm /var/log/auth.log /var/log/syslog /var/log/kern.log
