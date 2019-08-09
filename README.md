@@ -2,15 +2,15 @@
   <img src="https://raw.githubusercontent.com/lfkdev/MultiLogMonitor/master/mlogm_logo.png">
 </p>
 
+<p>A lightweight program (12KB) written in C# for linux to view multiple logs simultaneously in one terminal.</p>
+
 <div id="badges" align="center">
-![Size](https://img.shields.io/github/size/lfkdev/MultiLogMonitor/release/3.0/mlogm3-0.svg)
-![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
-![Version](https://img.shields.io/github/release-pre/lfkdev/MultiLogMonitor.svg)
-A lightweight program (12KB) written in C# for linux to view multiple logs simultaneously in one terminal.
+ 
+  [![Size](https://img.shields.io/github/size/lfkdev/MultiLogMonitor/release/3.0/mlogm3-0.svg)](https://github.com/lfkdev/mlogm/releases)
+[![Lizenz](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://dev.azure.com/vscodium/VSCodium/_build?definitionId=1)
+[![Version](https://img.shields.io/github/release-pre/lfkdev/MultiLogMonitor.svg)](https://travis-ci.com/VSCodium/vscodium) 
+
 </div>
-<p align="center">
-  <img src="https://raw.githubusercontent.com/lfkdev/MultiLogMonitor/master/mlogmpreview.gif">
-</p>
 
 ### Usage:
 ```
