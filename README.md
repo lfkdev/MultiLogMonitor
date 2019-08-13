@@ -38,10 +38,10 @@ Only [.NET Core runtime](https://dotnet.microsoft.com/download/linux-package-man
 
 ### Installation
 ```
-
 $ wget https://github.com/lfkdev/MultiLogMonitor/releases/download/0.3/mlogm-0.3.zip -O /usr/local/bin/mlogm.zip
 $ cd /usr/local/bin && unzip /usr/local/bin/mlogm.zip
-$ sudo chmod +x /usr/local/bin/mlogm.dll
+$ mv /usr/local/bin/mlogm-0.3/* /usr/local/bin/
+$ chmod +x /usr/local/bin/mlogm.dll
 ```
 Or just download the newest release from the release tab and move to what ever location you want.
 
