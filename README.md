@@ -3,7 +3,7 @@
 </p>
 
 <div id="badges" align="center">
- 
+
   [![Size](https://img.shields.io/github/size/lfkdev/MultiLogMonitor/release/0.3/mlogm.dll)](https://github.com/lfkdev/mlogm/releases)
 [![Lizenz](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/lfkdev/MultiLogMonitor)
 [![Version](https://img.shields.io/github/release-pre/lfkdev/MultiLogMonitor.svg)](https://github.com/lfkdev/MultiLogMonitor)
