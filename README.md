@@ -47,7 +47,7 @@ Or just download the newest release from the release tab and move to what ever l
 
 testing:
 ```
-$ dotnet mlogm.dll --about
+$ dotnet /usr/local/bin/mlogm.dll --about
 ```
 
 ### RoadMap
