@@ -20,13 +20,13 @@
 
 ### Usage:
 ```
-$ dotnet mlogm /var/log/auth.log /var/log/syslog /var/log/kern.log
+$ dotnet mlogm.dll /var/log/auth.log /var/log/syslog /var/log/kern.log
 ```
 Add as many logs as you want. The more logs are added the more space is needed in the terminal.
 Beside this there are two more arguments possible:
 ```
-$ dotnet mlogm  --about
-$ dotnet mlogm  -h / -H
+$ dotnet mlogm.dll  --about
+$ dotnet mlogm.dll  -h / -H
 ```
 
 ### Info
@@ -38,19 +38,19 @@ Only [.NET Core runtime](https://dotnet.microsoft.com/download/linux-package-man
 
 ### Installation
 ```
-$ wget https://github.com/lfkdev/MultiLogMonitor/releases/download/3.0/MultiLogMonitor3-0.zip -O /usr/local/bin/mlogm.zip
-$ unzip /usr/local/bin/mlogm.zip
-$ sudo chmod +x /usr/local/bin/mlogm
+
+$ wget https://github.com/lfkdev/MultiLogMonitor/releases/download/0.3/mlogm-0.3.zip -O /usr/local/bin/mlogm.zip
+$ cd /usr/local/bin && unzip /usr/local/bin/mlogm.zip
+$ sudo chmod +x /usr/local/bin/mlogm.dll
 ```
 Or just download the newest release from the release tab and move to what ever location you want.
 
 testing:
 ```
-$ dotnet mlogm --about
+$ dotnet mlogm.dll --about
 ```
 
 ### RoadMap
 - Performance optimizing
-- rescale window without breaking mlogm
 - config to parse different settings to mlogm (ex. a "grep" funktion")
 - more / better syntax highlight
